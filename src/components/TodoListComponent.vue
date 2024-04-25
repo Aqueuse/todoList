@@ -1,23 +1,20 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useTodoListStore } from '../stores/todos'
 
-let id = 0
+const todoStore = useTodoListStore()
 
 const newTodo = ref('')
-const hideCompleted = ref(false)
-const todos = ref([
-  { id: id++, text: 'Learn HTML', done: true },
-  { id: id++, text: 'Learn JavaScript', done: true },
-  { id: id++, text: 'Learn Vue', done: false }
-])
 
 function addTodo() {
-  todos.value.push({ id: id++, text: newTodo.value, done: false })
-  newTodo.value = ''
+    if (newTodo.value.trim()) {
+        todoStore.addTask(newTodo.value)
+        newTodo.value = ''
+    }
 }
 
-function removeTodo({ todo }: { todo: any }) {
-  todos.value = todos.value.filter((t) => t !== todo)
+function removeTodo(id : number) {
+    todoStore.removeTask(id)
 }
 </script>
 
@@ -26,19 +23,16 @@ function removeTodo({ todo }: { todo: any }) {
 
   <div>
     <form @submit.prevent="addTodo">
-      <input v-model="newTodo" required placeholder="new todo">
+      <input v-model="newTodo" required placeholder="new todo" />
       <button>Add Todo</button>
     </form>
     <ul>
-      <li v-for="todo in todos" :key="todo.id">
-        <input type="checkbox" v-model="todo.done">
+      <li v-for="todo in todoStore.tasks" :key="todo.id">
+        <input type="checkbox" v-model="todo.done" />
         <span :class="{ done: todo.done }">{{ todo.text }}</span>
-        <button @click="removeTodo({todo : todo})">X</button>
+        <button @click="removeTodo(todo.id)">X</button>
       </li>
     </ul>
-    <button @click="hideCompleted = !hideCompleted">
-      {{ hideCompleted ? 'Show all' : 'Hide completed' }}
-    </button>
   </div>
 </template>
 
