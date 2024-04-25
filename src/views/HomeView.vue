@@ -6,6 +6,7 @@ import TodoListView from '@/components/TodoListComponent.vue'
   <main>
     <TodoListView />
 
+    <el-divider />
     <router-link to="/about">About</router-link>
   </main>
 </template>

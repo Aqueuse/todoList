@@ -1,11 +1,17 @@
 <template>
   <div class="container">
     <div>
-      <h1>About this todo list</h1>
+      <el-header class="titleContainer">
+    <el-text class="title">About this todo list</el-text>
+  </el-header>
 
-      <p>Made with vue3</p>
+  <el-main>
+    <el-text>Made with vue3</el-text>
+    <el-divider />
+    <router-link to="/">Back to the Todo List</router-link>
+  </el-main>
 
-      <router-link to="/">Back to the Todo List</router-link>
+
     </div>
   </div>
 </template>
