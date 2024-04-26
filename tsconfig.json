@@ -9,9 +9,10 @@
     },
     {
       "path": "./tsconfig.vitest.json"
-    }
+    },
   ],
   "compilerOptions": {
-    "module": "NodeNext"
+    "module": "NodeNext",
+    "types": ["@types/node", "@types/vue"],
   }
 }

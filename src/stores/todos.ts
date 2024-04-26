@@ -18,8 +18,9 @@ export const useTodoListStore = defineStore('todoList', {
         text,
         done: false,
       });
+      return this.nextTaskId;
     },
-    toggleTaskCompletion(id: number) {
+    completeTask(id: number) {
       const taskIndex = this.tasks.findIndex((task) => task.id === id);
       if (taskIndex !== -1) {
         this.tasks[taskIndex].done = !this.tasks[taskIndex].done;
